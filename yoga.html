@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Yoga Tug of War – Class 4 TWAU Ch 6 Happy and Healthy Living</title>
+<style>
+:root{
+  --maroon:#7b1e2b; --maroon-d:#5a1520; --saffron:#f28c28; --saffron-l:#ffe2c2;
+  --green:#138808; --green-d:#0d6206; --green-l:#dff3d8; --cream:#fff8ec; --ink:#2b1a14; --muted:#6d5a50;
+  --red:#d23b2f; --line:#ead9c3; --shadow:0 6px 18px rgba(90,21,32,.14);
+  --A:#7b1e2b; --A-l:#fbe9ec; --B:#138808; --B-l:#e6f6e1;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:"Segoe UI","Nirmala UI",system-ui,-apple-system,Roboto,"Noto Sans",sans-serif;background:var(--cream);color:var(--ink);
+  user-select:none;-webkit-user-select:none;touch-action:manipulation;overflow-x:hidden}
+button{font:inherit;cursor:pointer;border:none}
+.topbar{display:flex;align-items:center;gap:12px;padding:8px 16px;background:var(--maroon);color:#fff;border-bottom:5px solid var(--saffron)}
+.topbar .badge{background:var(--saffron);color:var(--maroon-d);font-weight:800;border-radius:10px;padding:5px 10px;font-size:14px;white-space:nowrap}
+.topbar h1{font-size:clamp(17px,2.1vw,27px);font-weight:800;line-height:1.1}
+.topbar h1 small{display:block;font-size:.55em;font-weight:500;opacity:.85}
+.topbar .sp{flex:1}
+.tbtn{background:rgba(255,255,255,.15);color:#fff;border-radius:10px;padding:8px 12px;font-weight:700;font-size:15px}
+.tbtn:hover{background:rgba(255,255,255,.27)}
+.screen{display:none}
+.screen.on{display:block}
+
+/* ---------- SETUP ---------- */
+.setup{max-width:1100px;margin:18px auto;padding:0 16px}
+.hero{display:flex;gap:18px;align-items:center;background:#fff;border-radius:24px;box-shadow:var(--shadow);padding:16px 22px;margin-bottom:16px;flex-wrap:wrap}
+.hero .poses{display:flex;gap:4px;flex-wrap:wrap}
+.hero .poses svg{width:84px;height:84px;background:var(--cream);border-radius:16px}
+.hero h2{font-size:clamp(22px,2.6vw,34px);color:var(--maroon)}
+.hero p{color:var(--muted);font-size:clamp(15px,1.4vw,18px);margin-top:4px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.card{background:#fff;border-radius:20px;box-shadow:var(--shadow);padding:16px}
+.card h3{font-size:18px;color:var(--maroon);margin-bottom:10px}
+.team-in{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.team-in .dot{width:22px;height:22px;border-radius:50%;flex:none}
+.team-in input{flex:1;font:inherit;font-size:20px;font-weight:800;padding:10px 12px;border-radius:12px;border:3px solid var(--line);background:var(--cream);color:var(--ink)}
+.team-in input:focus{outline:none;border-color:var(--saffron)}
+.sets{display:grid;gap:10px}
+.set{display:flex;align-items:center;gap:12px;text-align:left;background:var(--cream);border:3px solid var(--line);border-radius:16px;padding:10px 14px}
+.set.on{border-color:var(--saffron);background:var(--saffron-l)}
+.set .ic{font-size:30px}
+.set b{display:block;font-size:18px;color:var(--maroon)}
+.set span{font-size:14px;color:var(--muted)}
+.opts-row{display:flex;gap:8px;flex-wrap:wrap}
+.chipbtn{background:var(--cream);border:3px solid var(--line);border-radius:12px;padding:8px 14px;font-weight:800;color:var(--maroon);font-size:16px}
+.chipbtn.on{background:var(--maroon);border-color:var(--maroon);color:#fff}
+.start{display:block;margin:6px auto 20px;background:var(--saffron);color:#fff;font-size:clamp(22px,2.4vw,30px);font-weight:900;border-radius:20px;padding:16px 46px;box-shadow:0 5px 0 #c96d14}
+.start:active{transform:translateY(3px);box-shadow:none}
+.rules{font-size:15px;color:var(--muted);line-height:1.5}
+.rules li{margin-left:18px}
+
+/* ---------- GAME ---------- */
+.arena{padding:10px 14px 14px;max-width:1700px;margin:0 auto}
+.ropebox{background:linear-gradient(#cfeaff,#eaf6ff 60%,#9fd36f 60%,#7cbd4a);border-radius:20px;box-shadow:var(--shadow);position:relative;height:150px;overflow:hidden;margin-bottom:12px}
+.ropebox svg{position:absolute;inset:0;width:100%;height:100%}
+.score{position:absolute;top:8px;font-weight:900;font-size:clamp(18px,2vw,26px);background:#fff;border-radius:14px;padding:4px 14px;box-shadow:0 3px 8px rgba(0,0,0,.12);z-index:2;max-width:38%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.score.A{left:10px;color:var(--A)} .score.B{right:10px;color:var(--B)}
+.center-flag{position:absolute;left:50%;top:6px;transform:translateX(-50%);background:var(--maroon);color:#fff;font-weight:800;border-radius:10px;padding:3px 10px;font-size:14px;z-index:2}
+.sides{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.side{background:#fff;border-radius:22px;box-shadow:var(--shadow);padding:12px 14px 14px;border-top:10px solid;display:flex;flex-direction:column;min-height:520px;position:relative}
+.side.A{border-color:var(--A)} .side.B{border-color:var(--B)}
+.shead{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.shead .tn{font-weight:900;font-size:clamp(18px,1.9vw,25px);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.A .tn{color:var(--A)} .B .tn{color:var(--B)}
+.qno{font-weight:800;background:var(--cream);border-radius:10px;padding:4px 10px;font-size:15px}
+.timer{width:56px;height:56px;position:relative;flex:none}
+.timer svg{width:100%;height:100%;transform:rotate(-90deg)}
+.timer b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900}
+.cat{display:inline-block;font-size:13px;font-weight:800;color:#fff;border-radius:8px;padding:3px 9px;margin-bottom:6px;align-self:flex-start}
+.cat.name{background:#1f78c0}.cat.poster{background:#c2185b}.cat.benefit{background:var(--green)}.cat.body{background:#e07b16}
+.qtext{font-size:clamp(19px,1.95vw,27px);font-weight:800;line-height:1.3;margin-bottom:8px;min-height:2.6em}
+.qfig{display:flex;justify-content:center;margin-bottom:8px;min-height:0}
+.qfig svg.pose{width:clamp(150px,15vw,210px);height:auto;background:linear-gradient(#f6fbff,#fff);border-radius:18px;border:3px solid var(--line)}
+.qfig svg.poster{width:clamp(170px,17vw,240px);height:auto;filter:drop-shadow(0 4px 8px rgba(0,0,0,.18))}
+.choices{display:grid;gap:10px;margin-top:auto}
+.choice{text-align:left;display:flex;align-items:center;gap:12px;background:var(--cream);border:3px solid var(--line);border-radius:16px;padding:12px 14px;
+  font-size:clamp(17px,1.7vw,23px);font-weight:700;color:var(--ink);transition:transform .1s,border-color .1s}
+.choice .k{flex:none;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:18px}
+.A .choice .k{background:var(--A)} .B .choice .k{background:var(--B)}
+.choice:hover{border-color:var(--saffron)}
+.choice:active{transform:scale(.98)}
+.choice.right{background:var(--green-l);border-color:var(--green)}
+.choice.wrong{background:#fde4e1;border-color:var(--red)}
+.choice:disabled{cursor:default}
+.fb{position:absolute;left:12px;right:12px;bottom:12px;border-radius:16px;padding:12px 14px;font-size:clamp(16px,1.6vw,21px);font-weight:700;
+  box-shadow:0 8px 24px rgba(0,0,0,.18);transform:translateY(20px);opacity:0;pointer-events:none;transition:all .2s;z-index:3}
+.fb.show{transform:none;opacity:1}
+.fb.good{background:var(--green);color:#fff}
+.fb.bad{background:var(--red);color:#fff}
+.fb small{display:block;font-weight:600;font-size:.85em;opacity:.95;margin-top:3px}
+.waiting{margin:auto;text-align:center;font-size:clamp(20px,2vw,28px);font-weight:900;color:var(--muted)}
+.waiting .big{font-size:60px;display:block}
+.dots{display:flex;gap:5px;justify-content:center;margin-top:8px}
+.dots i{width:16px;height:16px;border-radius:50%;background:#eee;border:2px solid #ddd}
+.dots i.ok{background:var(--green);border-color:var(--green)}
+.dots i.no{background:var(--red);border-color:var(--red)}
+.dots i.cur{border-color:var(--saffron);box-shadow:0 0 0 3px rgba(242,140,40,.35)}
+
+.modal{position:fixed;inset:0;background:rgba(43,26,20,.6);display:none;align-items:center;justify-content:center;z-index:70;padding:16px}
+.modal.on{display:flex}
+.modal .box{background:#fff;border-radius:26px;max-width:700px;width:100%;padding:26px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3);animation:pop .3s ease;max-height:92vh;overflow:auto}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:none;opacity:1}}
+.modal h3{font-size:clamp(26px,3.4vw,40px);color:var(--maroon);margin:6px 0}
+.modal p{font-size:clamp(17px,1.8vw,22px);line-height:1.45}
+.res{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.res div{border-radius:18px;padding:12px}
+.res .rA{background:var(--A-l);color:var(--A)} .res .rB{background:var(--B-l);color:var(--B)}
+.res b{display:block;font-size:44px;font-weight:900}
+.mrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.mbtn{border-radius:14px;padding:12px 20px;font-weight:900;font-size:19px;color:#fff}
+.mbtn.s{background:var(--saffron)} .mbtn.m{background:var(--maroon)} .mbtn.g{background:var(--green)}
+.trophy{font-size:70px;line-height:1}
+.confetti{position:fixed;top:-20px;width:12px;height:18px;z-index:80;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:10px 10px 18px}
+footer b{color:var(--maroon)}
+@media (max-width:900px){
+  .grid2{grid-template-columns:1fr}
+  .sides{grid-template-columns:1fr}
+  .side{min-height:0}
+  .ropebox{height:120px}
+  .topbar .badge{display:none}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <span class="badge">Class 4 · TWAU</span>
+  <h1>Yoga Tug of War <small>Chapter 6 · Happy and Healthy Living</small></h1>
+  <span class="sp"></span>
+  <button class="tbtn" id="homeBtn">🏠 Setup</button>
+  <button class="tbtn" id="muteBtn" title="Sound on/off">🔊</button>
+  <button class="tbtn" id="fsBtn" title="Full screen">⛶</button>
+</header>
+
+<!-- ============ SETUP ============ -->
+<section class="screen on" id="setup">
+ <div class="setup">
+  <div class="hero">
+    <div class="poses" id="heroPoses"></div>
+    <div style="flex:1;min-width:260px">
+      <h2>Yoga Tug of War 🧘</h2>
+      <p>Two teams, 10 questions each. Name the yoga pose, read the posters, and know the benefits and body parts used. Every right answer pulls the rope to your side!</p>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3>👥 Team names</h3>
+      <div class="team-in"><span class="dot" style="background:var(--A)"></span><input id="nameA" maxlength="18" value="Team Tadasana"></div>
+      <div class="team-in"><span class="dot" style="background:var(--B)"></span><input id="nameB" maxlength="18" value="Team Vrikshasana"></div>
+      <h3 style="margin-top:14px">⏱ Time for each question</h3>
+      <div class="opts-row" id="timeOpts">
+        <button class="chipbtn" data-t="20">20 s</button><button class="chipbtn on" data-t="30">30 s</button><button class="chipbtn" data-t="45">45 s</button><button class="chipbtn" data-t="0">No timer</button>
+      </div>
+    </div>
+    <div class="card">
+      <h3>📚 Choose questions</h3>
+      <div class="sets" id="sets">
+        <button class="set" data-s="A"><span class="ic">🧘</span><div><b>Pose Names &amp; Posters</b><span>Identify yoga poses from pictures and posters</span></div></button>
+        <button class="set" data-s="B"><span class="ic">💪</span><div><b>Benefits &amp; Body Parts</b><span>What each pose does and which body parts we use</span></div></button>
+        <button class="set on" data-s="M"><span class="ic">🌈</span><div><b>Mixed — All Yoga</b><span>Questions from everything</span></div></button>
+      </div>
+    </div>
+  </div>
+  <button class="start" id="startBtn">▶ START THE PULL!</button>
+  <div class="card rules"><b style="color:var(--maroon)">How to play:</b>
+    <ul><li>Each team plays on its own half of the board and gets its <b>own different questions</b>.</li>
+    <li>Each team moves on to its next question as soon as it answers — no waiting for the other team.</li>
+    <li>Right answer = the rope moves 1 step to your side. Time up or wrong answer = no pull.</li>
+    <li>After 10 questions each, the team with more right answers wins. Equal marks = a draw.</li></ul>
+  </div>
+ </div>
+</section>
+
+<!-- ============ GAME ============ -->
+<section class="screen" id="game">
+ <div class="arena">
+  <div class="ropebox">
+    <span class="score A" id="scA">Team A: 0</span>
+    <span class="center-flag">Centre</span>
+    <span class="score B" id="scB">Team B: 0</span>
+    <svg viewBox="0 0 1000 150" preserveAspectRatio="none" id="ropeSvg"></svg>
+  </div>
+  <div class="sides">
+    <div class="side A" id="sideA"></div>
+    <div class="side B" id="sideB"></div>
+  </div>
+ </div>
+</section>
+
+<footer>PM SHRI Kendriya Vidyalaya Raebareli · <b>Class 4 TWAU (Our Wondrous World) — Chapter 6: Happy and Healthy Living</b> · Yoga poses as in Activity 5, page 95 · Practise yoga only with your teacher's guidance.</footer>
+<div class="modal" id="modal"><div class="box" id="modalBox"></div></div>
+
+<script>
+(function(){
+"use strict";
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+
+/* ================= SOUND ================= */
+let muted=false, actx=null;
+function tone(f,d=.12,type='sine',vol=.08,when=0){ if(muted)return; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+  const t=actx.currentTime+when,o=actx.createOscillator(),g=actx.createGain(); o.type=type;o.frequency.setValueAtTime(f,t);
+  g.gain.setValueAtTime(vol,t); g.gain.exponentialRampToValueAtTime(.0001,t+d); o.connect(g).connect(actx.destination); o.start(t); o.stop(t+d+.02);}catch(e){} }
+const sGood=()=>{tone(660,.12);tone(880,.18,'sine',.08,.1)}, sBad=()=>tone(200,.28,'square',.04);
+const sWin=()=>[523,659,784,1046,1318].forEach((f,i)=>tone(f,.22,'triangle',.08,i*.13));
+function confetti(){ const cols=['#f28c28','#7b1e2b','#138808','#3fa2e8','#ffd23f'];
+  for(let i=0;i<90;i++){ const c=document.createElement('div'); c.className='confetti'; c.style.left=Math.random()*100+'vw';
+    c.style.background=cols[i%cols.length]; c.style.animationDuration=(1.8+Math.random()*2)+'s'; c.style.animationDelay=(Math.random()*.6)+'s';
+    document.body.appendChild(c); setTimeout(()=>c.remove(),4600);} }
+
+/* ================= YOGA FIGURES (drawn in code) ================= */
+/* 200x200 frame, mat at y≈186. head:[x,y]; torso:[neck,hip]; arms & legs: polylines [[x,y],...] */
+const P={
+ tadasana:{head:[100,40],torso:[[100,58],[100,116]],arms:[[[100,64],[86,36],[84,8]],[[100,64],[114,36],[116,8]]],legs:[[[96,116],[95,150],[95,183]],[[104,116],[105,150],[105,183]]],feet:[[95,183,-1],[105,183,1]]},
+ vrikshasana:{head:[100,44],torso:[[100,62],[100,118]],arms:[[[100,66],[84,44],[100,14]],[[100,66],[116,44],[100,14]]],legs:[[[98,118],[98,152],[98,183]],[[102,118],[134,136],[104,142]]],feet:[[98,183,-1]]},
+ pranamasana:{head:[100,40],torso:[[100,58],[100,116]],arms:[[[100,64],[82,86],[99,80]],[[100,64],[118,86],[101,80]]],legs:[[[96,116],[95,150],[95,183]],[[104,116],[105,150],[105,183]]],feet:[[95,183,-1],[105,183,1]]},
+ vajrasana:{head:[96,72],torso:[[93,90],[88,150]],arms:[[[94,96],[106,124],[126,160]]],legs:[[[88,150],[134,170],[84,181]]],feet:[[84,181,-1]]},
+ padmasana:{head:[100,74],torso:[[100,92],[100,150]],arms:[[[100,98],[74,124],[62,160]],[[100,98],[126,124],[138,160]]],legs:[[[100,152],[56,168],[118,165]],[[100,152],[144,168],[82,165]]],mudra:[[62,160],[138,160]]},
+ bhujangasana:{head:[152,96],torso:[[140,116],[96,170]],arms:[[[138,120],[140,150],[142,178]]],legs:[[[96,170],[60,177],[22,179]]],feet:[[22,179,-1]]},
+ shavasana:{head:[30,166],torso:[[48,170],[112,172]],arms:[[[50,170],[80,180],[106,182]]],legs:[[[112,172],[145,174],[178,174]]],feet:[[178,170,0]],lying:true},
+ balasana:{head:[140,170],torso:[[124,162],[70,152]],arms:[[[122,160],[152,178],[184,180]]],legs:[[[70,152],[110,178],[50,181]]],feet:[[50,181,-1]]},
+ paschimottanasana:{head:[132,152],torso:[[116,154],[58,172]],arms:[[[114,152],[142,164],[168,170]]],legs:[[[58,172],[112,177],[168,177]]],feet:[[170,170,0]]},
+ trikonasana:{head:[56,74],torso:[[70,86],[100,112]],arms:[[[70,88],[62,130],[58,174]],[[70,86],[80,50],[88,14]]],legs:[[[96,112],[78,148],[56,183]],[[104,112],[124,148],[148,183]]],feet:[[56,183,-1],[148,183,1]]},
+ naukasana:{head:[62,104],torso:[[72,120],[100,166]],arms:[[[74,122],[106,114],[140,106]]],legs:[[[100,166],[134,132],[166,100]]],feet:[[168,96,1]]},
+ ushtrasana:{head:[74,108],torso:[[88,112],[116,136]],arms:[[[90,114],[80,146],[72,176]]],legs:[[[116,136],[122,178],[68,181]]],feet:[[68,181,-1]]},
+ titli:{head:[100,86],torso:[[100,104],[100,160]],arms:[[[100,110],[86,140],[97,174]],[[100,110],[114,140],[103,174]]],legs:[[[96,162],[54,156],[97,178]],[[104,162],[146,156],[103,178]]]},
+ dhanurasana:{head:[156,124],torso:[[140,140],[100,168]],arms:[[[138,142],[110,130],[84,118]]],legs:[[[100,168],[62,172],[82,116]]],feet:[[82,112,0]]},
+ sukhasana:{head:[100,74],torso:[[100,92],[100,150]],arms:[[[100,98],[78,126],[70,158]],[[100,98],[122,126],[130,158]]],legs:[[[100,152],[60,170],[110,176]],[[100,152],[140,170],[90,176]]]}
+};
+const SHIRT='#f28c28', PANT='#1f4e9a', SKIN='#e8b27c', HAIR='#3e2723';
+function pl(pts){ return pts.map(p=>p.join(',')).join(' '); }
+function figureG(name,s=1){
+  const f=P[name]; let g='';
+  g+=`<rect x="8" y="184" width="184" height="9" rx="4.5" fill="#9ccc65" opacity=".75"/>`;
+  f.legs.forEach(l=>g+=`<polyline points="${pl(l)}" fill="none" stroke="${PANT}" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>`);
+  (f.feet||[]).forEach(([x,y,d])=>g+= d===0?`<circle cx="${x}" cy="${y}" r="6" fill="${SKIN}"/>`:`<ellipse cx="${x+d*5}" cy="${y+2}" rx="9" ry="5" fill="${SKIN}"/>`);
+  g+=`<line x1="${f.torso[0][0]}" y1="${f.torso[0][1]}" x2="${f.torso[1][0]}" y2="${f.torso[1][1]}" stroke="${SHIRT}" stroke-width="24" stroke-linecap="round"/>`;
+  f.arms.forEach(a=>{ g+=`<polyline points="${pl(a.slice(0,2))}" fill="none" stroke="${SHIRT}" stroke-width="11" stroke-linecap="round"/>`;
+    g+=`<polyline points="${pl(a.slice(1))}" fill="none" stroke="${SKIN}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>`;
+    const h=a[a.length-1]; g+=`<circle cx="${h[0]}" cy="${h[1]}" r="5.5" fill="${SKIN}"/>`; });
+  (f.mudra||[]).forEach(([x,y])=>g+=`<circle cx="${x}" cy="${y}" r="4" fill="none" stroke="#b5733b" stroke-width="2"/>`);
+  const [hx,hy]=f.head;
+  g+=`<circle cx="${hx}" cy="${hy}" r="14" fill="${SKIN}"/><path d="M${hx-14} ${hy-1} A14 14 0 0 1 ${hx+14} ${hy-1} Q${hx} ${hy-8} ${hx-14} ${hy-1}Z" fill="${HAIR}"/>`;
+  return g;
+}
+function poseSVG(name){ return `<svg class="pose" viewBox="0 0 200 200" aria-label="yoga pose picture">${figureG(name)}</svg>`; }
+function posterSVG(o){
+  const fig=o.pose?`<g transform="translate(30,52) scale(.8)">${figureG(o.pose)}</g>`:
+    `<g font-size="44" text-anchor="middle"><text x="65" y="130">🧘</text><text x="130" y="130">🌞</text><text x="100" y="182">🌿</text></g>`;
+  return `<svg class="poster" viewBox="0 0 220 260">
+   <rect x="3" y="3" width="214" height="254" rx="14" fill="#fff8ec" stroke="#f28c28" stroke-width="6"/>
+   <rect x="3" y="3" width="214" height="46" rx="14" fill="#7b1e2b"/><rect x="3" y="34" width="214" height="15" fill="#7b1e2b"/>
+   <text x="110" y="33" text-anchor="middle" font-size="${o.h.length>18?14:17}" font-weight="900" fill="#fff" font-family="Arial">${o.h}</text>
+   <circle cx="110" cy="132" r="76" fill="#ffe2c2" opacity=".7"/>
+   ${fig}
+   <rect x="3" y="216" width="214" height="41" fill="#138808"/><rect x="3" y="230" width="214" height="27" rx="14" fill="#138808"/>
+   <text x="110" y="243" text-anchor="middle" font-size="${o.f.length>20?13:16}" font-weight="900" fill="#fff" font-family="Arial">${o.f}</text></svg>`;
+}
+
+/* ================= QUESTION BANK ================= */
+/* c: name | poster | benefit | body ; set A = name+poster, set B = benefit+body */
+const Q=[
+ // ---- Pose names from pictures ----
+ {c:'name',pose:'tadasana',q:'Which yoga pose is shown in the picture?',a:'Tadasana (Palm-tree pose)',o:['Shavasana','Bhujangasana'],e:'In Tadasana we stand straight and stretch our arms up like a tall palm tree.'},
+ {c:'name',pose:'vrikshasana',q:'Which yoga pose is shown in the picture?',a:'Vrikshasana (Tree pose)',o:['Tadasana','Vajrasana'],e:'Standing on one leg with palms joined above the head is Vrikshasana — the tree pose from our book (page 95).'},
+ {c:'name',pose:'vajrasana',q:'Which yoga pose is shown in the picture?',a:'Vajrasana',o:['Padmasana','Balasana'],e:'Sitting on the heels with knees folded and back straight is Vajrasana (page 95).'},
+ {c:'name',pose:'padmasana',q:'Which yoga pose is shown in the picture?',a:'Padmasana (Lotus pose)',o:['Vrikshasana','Naukasana'],e:'Sitting cross-legged with feet on the thighs and hands on the knees is Padmasana.'},
+ {c:'name',pose:'bhujangasana',q:'Which yoga pose is shown in the picture?',a:'Bhujangasana (Cobra pose)',o:['Shavasana','Trikonasana'],e:'Lying on the stomach and lifting the chest like a cobra\'s hood is Bhujangasana.'},
+ {c:'name',pose:'shavasana',q:'Which yoga pose is shown in the picture?',a:'Shavasana',o:['Bhujangasana','Tadasana'],e:'Lying still and relaxed on the back is Shavasana.'},
+ {c:'name',pose:'balasana',q:'Which yoga pose is shown in the picture?',a:'Balasana (Child\'s pose)',o:['Ushtrasana','Tadasana'],e:'Kneeling and bending forward with the forehead on the mat is Balasana.'},
+ {c:'name',pose:'paschimottanasana',q:'Which yoga pose is shown in the picture?',a:'Paschimottanasana (Seated forward bend)',o:['Naukasana','Vrikshasana'],e:'Sitting with straight legs and bending forward to touch the toes is Paschimottanasana.'},
+ {c:'name',pose:'trikonasana',q:'Which yoga pose is shown in the picture?',a:'Trikonasana (Triangle pose)',o:['Padmasana','Balasana'],e:'Legs wide apart, one hand down to the foot and the other up — the body makes triangles.'},
+ {c:'name',pose:'naukasana',q:'Which yoga pose is shown in the picture?',a:'Naukasana (Boat pose)',o:['Dhanurasana','Vajrasana'],e:'Balancing on the hips with legs and arms raised makes the shape of a boat (nauka).'},
+ {c:'name',pose:'ushtrasana',q:'Which yoga pose is shown in the picture?',a:'Ushtrasana (Camel pose)',o:['Balasana','Tadasana'],e:'Kneeling, bending back and holding the heels is Ushtrasana — the camel pose.'},
+ {c:'name',pose:'titli',q:'Which yoga pose is shown in the picture?',a:'Titli Asana (Butterfly pose)',o:['Shavasana','Trikonasana'],e:'Sitting with soles of the feet together and knees moving up and down like wings is Titli Asana.'},
+ {c:'name',pose:'dhanurasana',q:'Which yoga pose is shown in the picture?',a:'Dhanurasana (Bow pose)',o:['Paschimottanasana','Vrikshasana'],e:'Lying on the stomach and holding the ankles makes the body curve like a bow (dhanush).'},
+ {c:'name',pose:'pranamasana',q:'Which yoga pose is shown in the picture?',a:'Pranamasana (Prayer pose)',o:['Shavasana','Naukasana'],e:'Standing with palms joined in front of the chest is Pranamasana.'},
+ {c:'name',q:'‘Vriksha’ means tree. So, Vrikshasana is the ___ pose.',a:'Tree pose',o:['Snake pose','Boat pose'],e:'Vriksha = tree. We stand tall and steady like a tree.'},
+ {c:'name',q:'‘Bhujanga’ means ___.',a:'Snake (cobra)',o:['Camel','Butterfly'],e:'In Bhujangasana our raised chest looks like a cobra\'s hood.'},
+ {c:'name',q:'‘Nauka’ means boat. In Naukasana our body looks like a ___.',a:'Boat',o:['Tree','Bow'],e:'Body balanced on the hips with a V-shape looks like a boat.'},
+ {c:'name',q:'‘Ushtra’ means ___.',a:'Camel',o:['Tree','Lotus'],e:'Ushtrasana is the camel pose.'},
+ {c:'name',q:'Which yoga pose is named after a butterfly?',a:'Titli Asana',o:['Bhujangasana','Tadasana'],e:'Titli means butterfly. Our knees flap like its wings.'},
+ {c:'name',q:'In which pose do we lie still on our back, as if sleeping?',a:'Shavasana',o:['Bhujangasana','Dhanurasana'],e:'Shavasana is a full-body relaxation pose.'},
+ {c:'name',q:'‘Padma’ means lotus. Which pose is the lotus pose?',a:'Padmasana',o:['Vajrasana','Tadasana'],e:'In Padmasana the crossed legs look like a lotus flower.'},
+ {c:'name',q:'In Trikonasana our body makes the shape of a ___.',a:'Triangle',o:['Circle','Square'],e:'Trikon = triangle.'},
+ // ---- Posters ----
+ {c:'poster',poster:{h:'INTERNATIONAL ___ DAY',f:'21 JUNE',pose:'vrikshasana'},q:'Fill the blank on this poster: International ___ Day.',a:'Yoga',o:['Sports','Food'],e:'International Yoga Day is celebrated every year on 21 June.'},
+ {c:'poster',poster:{h:'INTERNATIONAL YOGA DAY',f:'DATE: ?',pose:'padmasana'},q:'Which date should be written on this poster?',a:'21 June',o:['15 August','14 November'],e:'21 June is International Yoga Day. (15 August is Independence Day, 14 November is Children\'s Day.)'},
+ {c:'poster',poster:{h:'STAND TALL!',f:'Stretch to the sky',pose:'tadasana'},q:'Which pose is shown on this poster?',a:'Tadasana',o:['Shavasana','Balasana'],e:'Tadasana — standing tall and stretching up.'},
+ {c:'poster',poster:{h:'BALANCE LIKE A ___!',f:'Stand on one leg',pose:'vrikshasana'},q:'Fill the blank on this poster: “Balance like a ___!”',a:'Tree',o:['Fish','Car'],e:'Vrikshasana is the tree pose — it improves our balance.'},
+ {c:'poster',poster:{h:'SIT AFTER MEALS',f:'Helps digestion',pose:'vajrasana'},q:'Which pose is shown on this “Sit after meals” poster?',a:'Vajrasana',o:['Bhujangasana','Naukasana'],e:'Vajrasana can be done after eating; it helps digestion.'},
+ {c:'poster',poster:{h:'MY YOGA POSTER',f:'Slogan: ?'},q:'Which is the best slogan for a yoga poster?',a:'Do yoga daily, stay healthy and happy!',o:['Eat junk food every day!','Sleep late and play on mobile!'],e:'Regular yoga keeps us happy and active (page 96).'},
+ {c:'poster',poster:{h:'RELAX & REST',f:'Lie still, breathe slowly',pose:'shavasana'},q:'Which pose does this “Relax & Rest” poster show?',a:'Shavasana',o:['Trikonasana','Tadasana'],e:'Shavasana relaxes the whole body.'},
+ {c:'poster',poster:{h:'STRONG BACK',f:'Lift like a cobra',pose:'bhujangasana'},q:'Which pose is shown on this “Strong Back” poster?',a:'Bhujangasana',o:['Padmasana','Titli Asana'],e:'Bhujangasana makes the back and spine strong.'},
+ {c:'poster',poster:{h:'CALM MIND',f:'Sit, close eyes, breathe',pose:'padmasana'},q:'Which pose is shown on this “Calm Mind” poster?',a:'Padmasana',o:['Dhanurasana','Naukasana'],e:'Padmasana is used for meditation and calming the mind.'},
+ {c:'poster',poster:{h:'STRONG TUMMY',f:'Row your boat!',pose:'naukasana'},q:'This “Strong Tummy” poster shows which pose?',a:'Naukasana',o:['Vrikshasana','Shavasana'],e:'Naukasana makes our stomach (tummy) muscles strong.'},
+ {c:'poster',poster:{h:'YOGA RULES',f:'Rule: ?'},q:'Which rule should go on a “Yoga Rules” poster?',a:'Do yoga slowly with your teacher\'s guidance',o:['Do it very fast to finish first','Hold your breath for as long as you can'],e:'Our book says to practise yoga with the teacher\'s guidance (page 95).'},
+ {c:'poster',poster:{h:'YOGA RULES',f:'Wear: ?'},q:'What should we wear for yoga, as written on this poster?',a:'Loose, comfortable clothes',o:['Tight jeans and a belt','A heavy jacket'],e:'Loose clothes let us stretch and move freely.'},
+ {c:'poster',poster:{h:'FLAP YOUR WINGS!',f:'Loosen hips and thighs',pose:'titli'},q:'Which pose is shown on this “Flap your wings!” poster?',a:'Titli Asana',o:['Ushtrasana','Bhujangasana'],e:'In Titli Asana the knees move up and down like butterfly wings.'},
+ // ---- Benefits ----
+ {c:'benefit',pose:'vrikshasana',q:'This pose (Vrikshasana) mainly improves our ___.',a:'Balance and concentration',o:['Speed of running','Hunger'],e:'Standing steady on one leg needs balance and a focused mind.'},
+ {c:'benefit',q:'Which pose can be done right after eating to help digestion?',a:'Vajrasana',o:['Bhujangasana','Dhanurasana'],e:'Vajrasana is the pose we can sit in after meals.'},
+ {c:'benefit',q:'Which pose is done at the end of yoga to relax the whole body?',a:'Shavasana',o:['Trikonasana','Tadasana'],e:'Shavasana gives rest and relaxation.'},
+ {c:'benefit',pose:'bhujangasana',q:'Bhujangasana (shown) makes our ___ strong and flexible.',a:'Back (spine)',o:['Teeth','Hair'],e:'Lifting the chest bends and strengthens the spine.'},
+ {c:'benefit',q:'Which pose stretches the whole body and helps us stand straight?',a:'Tadasana',o:['Balasana','Shavasana'],e:'Tadasana improves posture.'},
+ {c:'benefit',pose:'padmasana',q:'Padmasana (shown) is best for ___.',a:'Meditation and calming the mind',o:['Running fast','Jumping high'],e:'We sit quietly in Padmasana for meditation and breathing.'},
+ {c:'benefit',q:'Naukasana makes our ___ muscles strong.',a:'Stomach (tummy)',o:['Ear','Nose'],e:'Holding the boat shape works the stomach muscles.'},
+ {c:'benefit',q:'According to our book, yoga improves our ___.',a:'Posture',o:['Handwriting','Hair colour'],e:'Page 96: yoga improves our posture and keeps us happy and active.'},
+ {c:'benefit',q:'According to our book, yoga keeps us ___.',a:'Happy and active',o:['Lazy and sleepy','Angry and tired'],e:'Page 96: yoga keeps us happy and active.'},
+ {c:'benefit',pose:'balasana',q:'Balasana (shown) helps us to ___.',a:'Relax and calm down',o:['Run faster','Lift heavy things'],e:'Balasana is a resting pose that relaxes the back and mind.'},
+ {c:'benefit',q:'Titli Asana loosens our ___.',a:'Hips and thighs',o:['Fingers and nails','Ears'],e:'Flapping the knees opens the hips and thighs.'},
+ {c:'benefit',pose:'trikonasana',q:'Trikonasana (shown) stretches the ___ of our body.',a:'Sides (waist) and legs',o:['Teeth','Eyelashes'],e:'Bending sideways stretches the waist and legs.'},
+ {c:'benefit',q:'Paschimottanasana stretches our ___.',a:'Back and the back of our legs',o:['Ears','Tongue'],e:'Bending forward over straight legs stretches the back and legs.'},
+ {c:'benefit',q:'Regular physical activity keeps us ___ (as our book says).',a:'Strong and energetic',o:['Weak and tired','Sleepy all day'],e:'Page 96: running, jumping, cycling and skipping keep us strong and energetic.'},
+ {c:'benefit',q:'Pranayama (yoga breathing) is good for our ___.',a:'Lungs and breathing',o:['Nails','Hair'],e:'Slow, deep breathing helps the lungs and calms us.'},
+ {c:'benefit',q:'Which of these is NOT a benefit of yoga?',a:'It makes us lazy',o:['It improves posture','It keeps us active'],e:'Yoga keeps us active — it does not make us lazy.'},
+ {c:'benefit',q:'After a busy day of exercise and play, our body needs ___.',a:'Good sleep and rest',o:['More TV','Junk food'],e:'Page 97: good sleep takes away tiredness and makes us fresh.'},
+ {c:'benefit',q:'Along with good food, our book says we also need to ___ regularly.',a:'Exercise',o:['Skip meals','Watch TV'],e:'Page 96: along with good food, we need to exercise regularly.'},
+ // ---- Body parts ----
+ {c:'body',q:'In Vrikshasana, we stand on ___.',a:'One leg',o:['Both hands','Our head'],e:'The other foot rests on the inner thigh.'},
+ {c:'body',pose:'vajrasana',q:'In Vajrasana (shown), we sit on our ___.',a:'Heels, with knees folded',o:['Stomach','Back'],e:'Knees folded and hips resting on the heels.'},
+ {c:'body',q:'In Bhujangasana, we lie on our ___.',a:'Stomach',o:['Back','Head'],e:'We lie face down and lift the chest.'},
+ {c:'body',q:'In Shavasana, we lie on our ___.',a:'Back',o:['Stomach','Hands'],e:'We lie on the back with arms and legs relaxed.'},
+ {c:'body',pose:'padmasana',q:'In Padmasana (shown), our feet rest on our ___.',a:'Thighs',o:['Head','Shoulders'],e:'Each foot is placed on the opposite thigh.'},
+ {c:'body',q:'In Tadasana, we stretch our ___ up towards the sky.',a:'Arms',o:['Ears','Knees'],e:'Arms go up and we stand on our feet, tall and straight.'},
+ {c:'body',pose:'paschimottanasana',q:'In this pose (Paschimottanasana), our hands try to touch our ___.',a:'Toes',o:['Ears','Head'],e:'We bend forward over straight legs to reach the toes.'},
+ {c:'body',q:'In Naukasana, our whole body balances on our ___.',a:'Hips (bottom)',o:['Hands','Head'],e:'Legs and upper body are lifted, only the hips touch the mat.'},
+ {c:'body',q:'In Titli Asana, we flap our ___ like butterfly wings.',a:'Knees (legs)',o:['Arms','Ears'],e:'Soles together, knees move up and down.'},
+ {c:'body',pose:'ushtrasana',q:'In Ushtrasana (shown), our hands hold our ___.',a:'Heels',o:['Head','Ears'],e:'We kneel, bend back and hold the heels.'},
+ {c:'body',pose:'dhanurasana',q:'In Dhanurasana (shown), our hands hold our ___.',a:'Ankles',o:['Nose','Shoulders'],e:'Holding the ankles pulls the body into a bow shape.'},
+ {c:'body',q:'In Bhujangasana, our ___ press the floor to lift the chest.',a:'Palms (hands)',o:['Feet','Knees'],e:'Palms near the chest push up gently.'},
+ {c:'body',q:'For pranayama (yoga breathing), we mainly use our ___.',a:'Nose and lungs',o:['Knees','Elbows'],e:'We breathe in and out slowly through the nose.'},
+ {c:'body',pose:'balasana',q:'In Balasana (shown), our forehead touches the ___.',a:'Floor (mat)',o:['Ceiling','Wall'],e:'We bend forward and rest the forehead on the mat.'},
+ {c:'body',pose:'trikonasana',q:'In Trikonasana (shown), one hand touches the foot and the other hand points ___.',a:'Up to the sky',o:['Into the pocket','Behind the head'],e:'Arms make one straight line from the foot to the sky.'},
+ {c:'body',pose:'pranamasana',q:'In Pranamasana (shown), we join our ___ in front of the chest.',a:'Palms',o:['Feet','Elbows'],e:'Palms together like saying Namaste.'},
+ {c:'body',q:'On page 96, two friends sit facing each other with their feet touching and hold each other\'s ___.',a:'Hands',o:['Heads','Shoulders'],e:'They stretch forward together — a partner yoga pose.'},
+ {c:'body',pose:'vrikshasana',q:'In Vrikshasana (shown), the foot of the bent leg is placed on the ___ of the other leg.',a:'Inner thigh',o:['Head','Back'],e:'The foot presses on the inner thigh while we balance.'}
+];
+const SETQ={A:Q.filter(x=>x.c==='name'||x.c==='poster'), B:Q.filter(x=>x.c==='benefit'||x.c==='body'), M:Q};
+const CATLAB={name:'🧘 Name the pose',poster:'🖼 Poster',benefit:'💪 Benefit',body:'🦵 Body parts'};
+const ROUNDS=10;
+
+/* ================= SETUP ================= */
+let chosenSet='M', qTime=30;
+$('#heroPoses').innerHTML=['vrikshasana','vajrasana','padmasana','bhujangasana'].map(poseSVG).join('');
+$$('#sets .set').forEach(b=>b.onclick=()=>{ chosenSet=b.dataset.s; $$('#sets .set').forEach(x=>x.classList.toggle('on',x===b)); });
+$$('#timeOpts .chipbtn').forEach(b=>b.onclick=()=>{ qTime=+b.dataset.t; $$('#timeOpts .chipbtn').forEach(x=>x.classList.toggle('on',x===b)); });
+$('#startBtn').onclick=startGame;
+$('#homeBtn').onclick=()=>{ stopAll(); closeModal(); show('setup'); };
+$('#muteBtn').onclick=e=>{ muted=!muted; e.currentTarget.textContent=muted?'🔇':'🔊'; };
+$('#fsBtn').onclick=()=>{ const d=document; if(!d.fullscreenElement)(d.documentElement.requestFullscreen||function(){}).call(d.documentElement); else d.exitFullscreen&&d.exitFullscreen(); };
+function show(id){ $$('.screen').forEach(s=>s.classList.toggle('on',s.id===id)); window.scrollTo(0,0); }
+function modal(h){ $('#modalBox').innerHTML=h; $('#modal').classList.add('on'); }
+function closeModal(){ $('#modal').classList.remove('on'); }
+
+/* ================= GAME STATE ================= */
+let T={}; // teams
+function stopAll(){ ['A','B'].forEach(k=>{ if(T[k]){ clearInterval(T[k].timer); clearTimeout(T[k].next);} }); }
+function startGame(){
+  stopAll(); closeModal();
+  const pool=shuffle(SETQ[chosenSet]);
+  const nA=($('#nameA').value.trim()||'Team A'), nB=($('#nameB').value.trim()||'Team B');
+  T={ A:{k:'A',name:nA,qs:pool.slice(0,ROUNDS),i:0,score:0,res:[],done:false,lock:false,start:performance.now()},
+      B:{k:'B',name:nB,qs:pool.slice(ROUNDS,ROUNDS*2),i:0,score:0,res:[],done:false,lock:false,start:performance.now()} };
+  ['A','B'].forEach(k=>T[k].qs=T[k].qs.map(q=>({...q,opts:shuffle([q.a,...q.o])})));
+  show('game'); drawRope(true); updScores(); renderQ('A'); renderQ('B');
+}
+function updScores(){ $('#scA').textContent=`${T.A.name}: ${T.A.score}`; $('#scB').textContent=`${T.B.name}: ${T.B.score}`; }
+function dots(t){ let h='<div class="dots">'; for(let i=0;i<ROUNDS;i++){ const r=t.res[i]; h+=`<i class="${r===true?'ok':r===false?'no':i===t.i&&!t.done?'cur':''}"></i>`; } return h+'</div>'; }
+function renderQ(k){
+  const t=T[k], el=$('#side'+k);
+  if(t.i>=ROUNDS){ t.done=true; t.finish=performance.now();
+    el.innerHTML=`<div class="shead"><span class="tn">${esc(t.name)}</span></div><div class="waiting"><span class="big">✅</span>All 10 done!<br>Score: ${t.score} / 10${T[k==='A'?'B':'A'].done?'':'<br><small style="font-size:.7em">Waiting for the other team…</small>'}${dots(t)}</div>`;
+    checkEnd(); return; }
+  const q=t.qs[t.i];
+  const fig=q.poster?posterSVG(q.poster):q.pose?poseSVG(q.pose):'';
+  el.innerHTML=`<div class="shead"><span class="tn">${esc(t.name)}</span><span class="qno">Q ${t.i+1} / ${ROUNDS}</span>
+     ${qTime?`<div class="timer"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="none" stroke="#eee" stroke-width="5"/><circle class="ring" cx="20" cy="20" r="17" fill="none" stroke="${k==='A'?'#7b1e2b':'#138808'}" stroke-width="5" stroke-dasharray="106.8" stroke-dashoffset="0" stroke-linecap="round"/></svg><b class="tl">${qTime}</b></div>`:''}</div>
+    <span class="cat ${q.c}">${CATLAB[q.c]}</span>
+    <div class="qtext">${q.q}</div>
+    ${fig?`<div class="qfig">${fig}</div>`:''}
+    <div class="choices">${q.opts.map((o,j)=>`<button class="choice" data-j="${j}"><span class="k">${'ABC'[j]}</span><span>${o}</span></button>`).join('')}</div>
+    ${dots(t)}
+    <div class="fb"></div>`;
+  $$('.choice',el).forEach(b=>b.onclick=()=>answer(k,+b.dataset.j));
+  t.lock=false;
+  clearInterval(t.timer);
+  if(qTime){ let left=qTime; const ring=$('.ring',el), tl=$('.tl',el);
+    t.timer=setInterval(()=>{ left--; tl.textContent=left; ring.setAttribute('stroke-dashoffset',106.8*(1-left/qTime));
+      if(left<=5&&left>0) tone(880,.05,'sine',.03);
+      if(left<=0){ clearInterval(t.timer); answer(k,-1); } },1000); }
+}
+function esc(s){ return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function answer(k,j){
+  const t=T[k]; if(t.lock||t.done)return; t.lock=true; clearInterval(t.timer);
+  const el=$('#side'+k), q=t.qs[t.i], ok=j>=0&&q.opts[j]===q.a;
+  $$('.choice',el).forEach((b,x)=>{ b.disabled=true; if(q.opts[x]===q.a) b.classList.add('right'); else if(x===j) b.classList.add('wrong'); });
+  t.res[t.i]=ok;
+  const fb=$('.fb',el);
+  if(ok){ t.score++; sGood(); fb.className='fb show good'; fb.innerHTML=`✅ Correct! Pull! 💪<small>${q.e}</small>`; }
+  else { sBad(); fb.className='fb show bad'; fb.innerHTML=`${j<0?'⏰ Time up!':'❌ Not quite.'} Answer: <b>${q.a}</b><small>${q.e}</small>`; }
+  updScores(); drawRope(false,ok?k:null);
+  t.next=setTimeout(()=>{ t.i++; renderQ(k); }, ok?1900:3000);
+}
+function checkEnd(){
+  if(!(T.A.done&&T.B.done)) return;
+  stopAll();
+  setTimeout(()=>{
+    const a=T.A.score,b=T.B.score, win=a>b?'A':b>a?'B':null;
+    drawRope(false,win,true);
+    if(win){ sWin(); confetti(); }
+    modal(`<div class="trophy">${win?'🏆':'🤝'}</div><h3>${win?esc(T[win].name)+' wins the pull!':'It\'s a draw!'}</h3>
+      <div class="res"><div class="rA">${esc(T.A.name)}<b>${a}</b>out of 10</div><div class="rB">${esc(T.B.name)}<b>${b}</b>out of 10</div></div>
+      <p>${win?'Great teamwork!':'Both teams pulled equally hard!'} 🧘 Remember: do yoga daily, eat well and sleep well to stay happy and healthy.</p>
+      <div class="mrow"><button class="mbtn s" id="again">🔄 Play again (new questions)</button><button class="mbtn m" id="toSetup">⚙ Setup</button></div>`);
+    $('#again').onclick=startGame; $('#toSetup').onclick=()=>{ closeModal(); show('setup'); };
+  },900);
+}
+
+/* ================= ROPE ANIMATION ================= */
+let ropeX=0;
+function kid(x,flip,col,lean){ // simple pulling child at ground y=128
+  const s=flip?-1:1;
+  return `<g transform="translate(${x},0) scale(${s},1)">
+   <polyline points="0,96 ${-8-lean},112 ${-14-lean},132" fill="none" stroke="#1f4e9a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+   <polyline points="0,96 ${6-lean},114 ${2-lean},132" fill="none" stroke="#1f4e9a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+   <line x1="0" y1="96" x2="${-10+lean*.2}" y2="64" stroke="${col}" stroke-width="12" stroke-linecap="round"/>
+   <polyline points="${-8+lean*.2},70 ${8},80 ${20},84" fill="none" stroke="#e8b27c" stroke-width="5" stroke-linecap="round"/>
+   <circle cx="${-13+lean*.2}" cy="52" r="10" fill="#e8b27c"/><path d="M${-23+lean*.2} 51 A10 10 0 0 1 ${-3+lean*.2} 51Z" fill="#3e2723"/></g>`;
+}
+function drawRope(reset,puller,final){
+  const d=(T.A?T.A.score:0)-(T.B?T.B.score:0);
+  const target=Math.max(-10,Math.min(10,d))*-28; // A ahead -> rope moves left
+  const from=reset?target:ropeX, t0=performance.now(), D=600;
+  (function step(t){ const k=Math.min(1,(t-t0)/D), e=1-Math.pow(1-k,3), x=from+(target-from)*e; ropeX=x; paint(x,puller,final); if(k<1) requestAnimationFrame(step); })(t0);
+}
+function paint(x,puller,final){
+  const lA=puller==='A'?14:6, lB=puller==='B'?14:6;
+  let g=`<line x1="500" y1="18" x2="500" y2="140" stroke="#7b1e2b" stroke-width="4" stroke-dasharray="8 6"/>`;
+  g+=`<rect x="200" y="122" width="12" height="18" fill="#7b1e2b" opacity=".5"/><rect x="788" y="122" width="12" height="18" fill="#138808" opacity=".5"/>`;
+  g+=`<path d="M${60+x} 84 Q${500+x} ${92} ${940+x} 84" fill="none" stroke="#a1683a" stroke-width="9" stroke-linecap="round"/>`;
+  g+=`<path d="M${60+x} 84 Q${500+x} ${92} ${940+x} 84" fill="none" stroke="#d4a373" stroke-width="3" stroke-dasharray="10 8"/>`;
+  g+=`<rect x="${492+x}" y="70" width="16" height="34" rx="3" fill="#f28c28" stroke="#c96d14" stroke-width="2"/>`;
+  [0,1,2].forEach(i=>g+=kid(120+x+i*70,false,'#7b1e2b',lA));
+  [0,1,2].forEach(i=>g+=kid(880+x-i*70,true,'#138808',lB));
+  if(final){ const w=(T.A.score>T.B.score)?'A':(T.B.score>T.A.score)?'B':null; if(w) g+=`<text x="${w==='A'?250:750}" y="40" text-anchor="middle" font-size="30" font-weight="900" fill="${w==='A'?'#7b1e2b':'#138808'}" font-family="Arial">🏆 WINNER</text>`; }
+  $('#ropeSvg').innerHTML=g;
+}
+paint(0);
+})();
+</script>
+</body>
+</html>
